@@ -47,14 +47,29 @@ class Auth:
             return False
 
 
+class TCGPlayer:
+    def __init__(self, token, version):
+        header = {"Authorization": f"bearer {token}"}
+        self.header = header
+        self.version = version
 
+    def ListAllCategories(self, limit=10):
+        url = f"http://api.tcgplayer.com/{self.version}/catalog/categories?limit={limit}"
+
+        r = requests.get(url, headers=self.header)
+
+        print(r.text)
     
 
 
-    
+if __name__ == '__main__':
+    tempToken = "ElDRqj0zWLqNXkMyg3FGA0DxGfSS-Vg5kmWWvBrNQkcwBTmZLm7_4NmZnFm17_11EhOUe6PDm8NX0pJJM42uzlwjVFDg5jezoU_tF6huXe0LCscNuCmiqoZES2Me501gzrEipZ7D5CbiT3yVoAjpLNyieJOnG_po8oIJ-kVwsLyAtMNZlcU1pN8wkySB-ux6zndwYnYT-OzLxe1c10VnBTZAyv0pEUZ8vkEn56Xz06ObhFjWQrpqt8_xFJtoOa8Yos_JmpP_P_O9azJ60vW7Eo61hnZqiD0USXpVoqdTMA-tLWAztNar6rTvDCMeYVkZ_6irvg"
+    TCG = TCGPlayer(tempToken, "v1.37.0") 
+
+    TCG.ListAllCategories(100)
 
 
 
-        
+    # ! Next up: https://docs.tcgplayer.com/reference#catalog_getcategorygroups-1
 
     
